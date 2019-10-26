@@ -4,15 +4,7 @@ const { resourceError, serverError } = require('../util/error')
 
 module.exports = {
    create(req, res, next) {
-      let { unit, month, id } = req.body
-
-      let electricityBill = unit => {
-         if(unit < 300) {
-            return unit * 5.5
-         } else {
-            return unit * 6
-         }
-      }
+      let { unit, electricityBill, month, id } = req.body
 
       let totalAmount = (a, b, c, d) => {
          return a + b + c + d
@@ -26,7 +18,7 @@ module.exports = {
                   let { perMonthGas, perMonthWater, rent, _id } = tenant
                   let abcd = {
                      rent,
-                     electricityBill: electricityBill(unit),
+                     electricityBill: parseInt(electricityBill),
                      gasBill: perMonthGas,
                      waterBill: perMonthWater,
                   }
@@ -34,7 +26,7 @@ module.exports = {
                      rent,
                      unit,
                      month,
-                     electricityBill: electricityBill(unit),
+                     electricityBill: parseInt(electricityBill),
                      gasBill: perMonthGas,
                      waterBill: perMonthWater,
                      totalAmount: totalAmount(abcd.rent, abcd.electricityBill, abcd.gasBill, abcd.waterBill),
