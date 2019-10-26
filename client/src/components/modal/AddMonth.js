@@ -7,6 +7,7 @@ class AddMonth extends React.Component{
    state = {
       month: '',
       unit: 0,
+      electricityBill: 0,
       id: ''
    }
 
@@ -22,12 +23,13 @@ class AddMonth extends React.Component{
       this.props.createMonth(this.state)
       this.setState({
          month: '',
-         unit: 0
+         unit: 0,
+         electricityBill: 0
       })
    }
    
    render() {
-      let { month, unit } = this.state
+      let { month, unit, electricityBill } = this.state
 
       return (
          <div className="">
@@ -77,13 +79,25 @@ class AddMonth extends React.Component{
                               </select>
                            </div>
                            <div className="form-group">
-                              <label htmlFor="unit"> Mitre unit :</label>
+                              <label htmlFor="unit"> Miter unit :</label>
                               <input 
                                  className="form-control form-control-sm" 
                                  type="number" 
                                  name="unit"
                                  placeholder="Enter Units"
                                  value={unit}
+                                 onChange={this.changeHnadler}
+                                 required
+                              />
+                           </div>
+                           <div className="form-group">
+                              <label htmlFor="electricityBill"> Electricity Bill :</label>
+                              <input 
+                                 className="form-control form-control-sm" 
+                                 type="number" 
+                                 name="electricityBill"
+                                 placeholder="Electricity Bill"
+                                 value={electricityBill}
                                  onChange={this.changeHnadler}
                                  required
                               />
